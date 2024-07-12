@@ -1,0 +1,26 @@
+.wrapper {
+    background-color: rgb(251, 255, 248);
+}
+
+.completed {
+    color: rgb(4, 117, 4);
+}
+
+.not-completed {
+    color: rgb(250, 97, 97);
+}
+
+.close-button {
+    cursor: pointer;
+    background-color: #4bafa4;
+    color: white;
+    border-radius: 20px;
+    padding: 0 20px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+    width: 100px;
+    height: 25px;
+}
+
+.mat-dialog-actions {
+    padding: 12px 0 24px;
+}

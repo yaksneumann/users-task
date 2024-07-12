@@ -1,0 +1,16 @@
+  table {
+    gap: 0.5rem;
+    background-color: #73fafe;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .mat-mdc-header-row {
+    text-align: center;
+    background-color: #25806a;
+  }
+
+  .mat-mdc-header-cell {
+    color: black;
+    font-weight: bold;
+  }
