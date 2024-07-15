@@ -1,0 +1,46 @@
+.error-container {
+    margin: 0 auto;
+    max-width: 300px;
+    z-index: 1000;
+  }
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 16px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+  }
+  .error-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  .error-text {
+    flex-grow: 1;
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #721c24;
+    padding: 0;
+    margin-left: 10px;
+  }
+  .close-btn:hover {
+    color: #491217;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }

@@ -5,13 +5,16 @@ import { ModalComponent } from '../modal/modal.component';
 import { MatTableModule } from '@angular/material/table';
 
 import { ApiService } from '../api.service';
+import { ErrorDisplayComponent } from '../error-display/error-display.component';
+import { ErrorService } from '../error.service';
+
 // import { USERS } from '../data/users';
 // import { TASKS } from '../data/tasks';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, ErrorDisplayComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
@@ -30,7 +33,7 @@ export class UsersComponent implements OnInit {
   users: any[] = [];
   // tasks: any[] = [];
 
-  constructor(private dialog: MatDialog, private api: ApiService) {
+  constructor(private dialog: MatDialog, private api: ApiService, private errorService: ErrorService) {
     this.dataSource = new MatTableDataSource(this.users);
   }
 
@@ -42,6 +45,7 @@ export class UsersComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching users:', error);
+        this.errorService.showError(error.message);
       }
     });
   }
@@ -56,7 +60,8 @@ export class UsersComponent implements OnInit {
         });       
       },
       error: (error) => {
-        console.error('Error fetching users:', error);
+        console.error('API error:', error.message);
+        this.errorService.showError(error.message);
       }
     });
   }

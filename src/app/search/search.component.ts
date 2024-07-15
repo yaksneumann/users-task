@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { ApiService } from '../api.service';
+import { ErrorService } from '../error.service';
+
+// import { ErrorService } from '../error.service';
+// import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-search',
   standalone: true,
@@ -15,7 +20,11 @@ export class SearchComponent {
   searchNumber: number | null = null;
   searchResult: string = '';
 
-  constructor(private dialog: MatDialog, private api: ApiService) {}
+  constructor(
+    private dialog: MatDialog,
+    private api: ApiService,
+    private errorService: ErrorService
+  ) {}
 
   onValueChange(value: string) {
     this.searchNumber = value ? Number(value) : null;
@@ -30,11 +39,12 @@ export class SearchComponent {
       next: (data) => {
         const userTasks = data;
         this.dialog.open(ModalComponent, {
-          data: { name: this.searchNumber, tasks: userTasks },
+          data: { name: userId, tasks: userTasks },
         });
       },
       error: (error) => {
         console.error('Error fetching users:', error);
+        this.errorService.showError(error.message);
       },
     });
   }

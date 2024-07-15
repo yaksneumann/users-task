@@ -1,0 +1,12 @@
+  <!-- <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+    <button (click)="clearError()" class="close-btn">&times;</button>
+  </div> -->
+
+  <div *ngIf="errorMessage" class="error-container">
+    <div class="error-message">
+      <span class="error-icon">⚠</span>
+      <span class="error-text">{{ errorMessage }}</span>
+      <button (click)="clearError()" class="close-btn">&times;</button>
+    </div>
+  </div>
