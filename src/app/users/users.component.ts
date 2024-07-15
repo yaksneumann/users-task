@@ -5,8 +5,8 @@ import { ModalComponent } from '../modal/modal.component';
 import { MatTableModule } from '@angular/material/table';
 
 import { ApiService } from '../api.service';
-import { USERS } from '../data/users';
-import { TASKS } from '../data/tasks';
+// import { USERS } from '../data/users';
+// import { TASKS } from '../data/tasks';
 
 @Component({
   selector: 'app-users',
@@ -27,7 +27,8 @@ export class UsersComponent implements OnInit {
     'company'
   ];
   dataSource: MatTableDataSource<any>;
-  users: any;
+  users: any[] = [];
+  // tasks: any[] = [];
 
   constructor(private dialog: MatDialog, private api: ApiService) {
     this.dataSource = new MatTableDataSource(this.users);
@@ -46,19 +47,27 @@ export class UsersComponent implements OnInit {
   }
 
   onClickedUser(user: any) {
-    console.log(user);
     const { id: userId } = user;
-    const userTasks = TASKS.filter((task) => task.userId === userId);
-    this.dialog.open(ModalComponent, {
-      data: { name: user.name, tasks: userTasks },
+    this.api.getTasksByUser(userId).subscribe({
+      next: (data) => {
+        const userTasks = data; 
+        this.dialog.open(ModalComponent, {
+          data: { name: user.name, tasks: userTasks },
+        });       
+      },
+      error: (error) => {
+        console.error('Error fetching users:', error);
+      }
     });
   }
 
-  // @Input() id!: number;
-  // @Input() name!: string;
-  // @Output() selectedUser = new EventEmitter();
-
-  // onSelectedUser(){
-  //   this.selectedUser.emit(this.id);
+  //old way with dummy data
+  // onClickedUser(user: any) {
+  //   console.log(user);
+  //   const { id: userId } = user;
+  //   const userTasks = TASKS.filter((task) => task.userId === userId);
+  //   this.dialog.open(ModalComponent, {
+  //     data: { name: user.name, tasks: userTasks },
+  //   });
   // }
 }
