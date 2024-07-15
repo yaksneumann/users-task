@@ -13,8 +13,4 @@ import { NavComponent } from './nav/nav.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  // onSelectUser(id: string) {
-  //   console.log('hello from app c');
-  // }
-}
+export class AppComponent {}
