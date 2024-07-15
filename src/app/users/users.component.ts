@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output, input, output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, input, output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { MatTableModule } from '@angular/material/table';
 
+import { ApiService } from '../api.service';
 import { USERS } from '../data/users';
 import { TASKS } from '../data/tasks';
 
@@ -14,7 +15,7 @@ import { TASKS } from '../data/tasks';
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
   displayedColumns: string[] = [
     'name',
@@ -26,9 +27,22 @@ export class UsersComponent {
     'company'
   ];
   dataSource: MatTableDataSource<any>;
+  users: any;
 
-  constructor(private dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(USERS);
+  constructor(private dialog: MatDialog, private api: ApiService) {
+    this.dataSource = new MatTableDataSource(this.users);
+  }
+
+  ngOnInit() {
+    this.api.getUsers().subscribe({
+      next: (data) => {
+        this.users = data;
+        this.dataSource = new MatTableDataSource(this.users);
+      },
+      error: (error) => {
+        console.error('Error fetching users:', error);
+      }
+    });
   }
 
   onClickedUser(user: any) {
