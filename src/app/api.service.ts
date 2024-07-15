@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-
   private apiUrl = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) { }
@@ -15,7 +14,7 @@ export class ApiService {
     return this.http.get<any[]>(`${this.apiUrl}/users`);
   }
 
-  getTasks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/users`);
+  getTasksByUser(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/todos?userId=${userId}`);
   }
 }
