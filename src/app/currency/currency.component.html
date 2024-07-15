@@ -1,1 +1,15 @@
-<p>currency works!</p>
+<div *ngIf="exchangeRate$ | async as exchangeRate">
+    <h2>Exchange Rate</h2>
+    <p>From Currency: {{exchangeRate['1. From_Currency Code']}} ({{exchangeRate['2. From_Currency Name']}})</p>
+    <p>To Currency: {{exchangeRate['3. To_Currency Code']}} ({{exchangeRate['4. To_Currency Name']}})</p>
+    <p [ngClass]="{
+        'rate-up': exchangeRate.trend === 'up',
+        'rate-down': exchangeRate.trend === 'down'
+      }">
+      Exchange Rate: {{exchangeRate.currentRate}}
+    </p>
+    <p>Last Refreshed: {{exchangeRate['6. Last Refreshed']}}</p>
+    <p>Time Zone: {{exchangeRate['7. Time Zone']}}</p>
+    <p>Bid Price: {{exchangeRate['8. Bid Price']}}</p>
+    <p>Ask Price: {{exchangeRate['9. Ask Price']}}</p>
+  </div>

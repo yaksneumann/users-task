@@ -7,15 +7,19 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   console.log(`randomNumber: ${randomNumber}`);
 
   const modifiedReq = req.clone({
-    setHeaders: {
-      'Custom-Header': randomNumber.toString()
-    }
-  });
-  if (randomNumber > 15) {
-    return throwError(() => new Error('random number to high!'))
-  }
-  
 
+    // must comment for currency api to work
+
+    // setHeaders: {
+    //   'Custom-Header': randomNumber.toString()
+    // }
+  });
+  //  comment for currency api
+
+  // if (randomNumber > 15) {
+  //   throwError(() => new Error('random number to high!'))
+  // }
+  
   // Handle the modified request and catch any errors
   return next(modifiedReq).pipe(
     catchError((error: HttpErrorResponse) => {
